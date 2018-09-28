@@ -4,6 +4,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.design.widget.NavigationView
+import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentTransaction
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
@@ -20,7 +21,8 @@ import kotlinx.android.synthetic.main.app_bar_main.*
 class MainActivity :
         AppCompatActivity(),
         NavigationView.OnNavigationItemSelectedListener,
-        ChooseQuizFragment.OnFragmentInteractionListener {
+        ChooseQuizFragment.OnFragmentInteractionListener,
+        CreateUserFragment.OnFragmentInteractionListener {
 
     lateinit var chooseQuizFragment: ChooseQuizFragment
     lateinit var quizFragment: QuizFragment
@@ -46,6 +48,8 @@ class MainActivity :
 
         chooseQuizFragment = ChooseQuizFragment.newInstance()
         quizFragment = QuizFragment.newInstance("a", "b")
+        createUserFragment = CreateUserFragment.newInstance("a", "b")
+        quizResultsFragment = QuizResultsFragment.newInstance("a", "b")
 
         supportFragmentManager
                 .beginTransaction()
@@ -80,15 +84,9 @@ class MainActivity :
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        // Handle navigation view item clicks here.
         when (item.itemId) {
             R.id.nav_start_quiz -> {
-                supportFragmentManager
-                        .beginTransaction()
-                        .replace(R.id.fragments_container, chooseQuizFragment)
-                        .addToBackStack(chooseQuizFragment.toString())
-                        .setTransitionStyle(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                        .commit()
+                openFragment(chooseQuizFragment)
             }
             R.id.nav_dashboard -> {
 
@@ -97,7 +95,7 @@ class MainActivity :
 
             }
             R.id.nav_new_user -> {
-
+                openFragment(createUserFragment)
             }
         }
 
@@ -107,5 +105,14 @@ class MainActivity :
 
     override fun onFragmentInteraction(uri: Uri) {
 
+    }
+
+    private fun openFragment(newFragment: Fragment) {
+        supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.fragments_container, newFragment)
+                .addToBackStack(newFragment.toString())
+                .setTransitionStyle(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                .commit()
     }
 }
