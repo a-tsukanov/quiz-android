@@ -1,17 +1,31 @@
 package edu.poms.tsukanov.quiz
 
+import android.net.Uri
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.design.widget.NavigationView
+import android.support.v4.app.FragmentTransaction
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import edu.poms.tsukanov.quiz.fragments.ChooseQuizFragment
+import edu.poms.tsukanov.quiz.fragments.CreateUserFragment
+import edu.poms.tsukanov.quiz.fragments.QuizFragment
+import edu.poms.tsukanov.quiz.fragments.QuizResultsFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class MainActivity :
+        AppCompatActivity(),
+        NavigationView.OnNavigationItemSelectedListener,
+        ChooseQuizFragment.OnFragmentInteractionListener {
+
+    lateinit var chooseQuizFragment: ChooseQuizFragment
+    lateinit var quizFragment: QuizFragment
+    lateinit var quizResultsFragment: QuizResultsFragment
+    lateinit var createUserFragment: CreateUserFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +43,16 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
+
+        chooseQuizFragment = ChooseQuizFragment.newInstance()
+        quizFragment = QuizFragment.newInstance("a", "b")
+
+        supportFragmentManager
+                .beginTransaction()
+                .add(R.id.fragments_container, chooseQuizFragment)
+                .addToBackStack(chooseQuizFragment.toString())
+                .setTransitionStyle(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                .commit()
     }
 
     override fun onBackPressed() {
@@ -59,7 +83,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // Handle navigation view item clicks here.
         when (item.itemId) {
             R.id.nav_start_quiz -> {
-                // Handle the camera action
+                supportFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.fragments_container, chooseQuizFragment)
+                        .addToBackStack(chooseQuizFragment.toString())
+                        .setTransitionStyle(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                        .commit()
             }
             R.id.nav_dashboard -> {
 
@@ -74,5 +103,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    override fun onFragmentInteraction(uri: Uri) {
+
     }
 }
