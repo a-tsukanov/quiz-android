@@ -4,11 +4,16 @@ import android.content.Context
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentTransaction
+import android.support.v7.widget.AppCompatImageButton
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageButton
 
 import edu.poms.tsukanov.quiz.R
+import kotlinx.android.synthetic.main.fragment_choose_quiz.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -27,21 +32,32 @@ private const val ARG_PARAM2 = "param2"
 class ChooseQuizFragment : Fragment() {
     private var listener: OnFragmentInteractionListener? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    lateinit var quizFragment: QuizFragment
+    lateinit var quiz1: ImageButton
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
 
+        super.onActivityCreated(savedInstanceState)
+        quiz1 = activity!!.findViewById(R.id.quiz1)
+        quizFragment = QuizFragment.newInstance("a", "b")
+        quiz1.setOnClickListener {
+            activity?.supportFragmentManager!!.beginTransaction()
+                    .replace(R.id.fragments_container, quizFragment)
+                    .addToBackStack(quizFragment.toString())
+                    .setTransitionStyle(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                    .commit() }
     }
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_choose_quiz, container, false)
-    }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    fun onButtonPressed(uri: Uri) {
-        listener?.onFragmentInteraction(uri)
+
+
+        return inflater.inflate(R.layout.fragment_choose_quiz, container, false)
+
+
     }
 
     override fun onAttach(context: Context) {

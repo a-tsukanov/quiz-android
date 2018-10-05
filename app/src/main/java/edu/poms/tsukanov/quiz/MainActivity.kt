@@ -2,7 +2,6 @@ package edu.poms.tsukanov.quiz
 
 import android.net.Uri
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.design.widget.NavigationView
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentTransaction
@@ -22,7 +21,8 @@ class MainActivity :
         AppCompatActivity(),
         NavigationView.OnNavigationItemSelectedListener,
         ChooseQuizFragment.OnFragmentInteractionListener,
-        CreateUserFragment.OnFragmentInteractionListener {
+        CreateUserFragment.OnFragmentInteractionListener,
+        QuizFragment.OnFragmentInteractionListener {
 
     lateinit var chooseQuizFragment: ChooseQuizFragment
     lateinit var quizFragment: QuizFragment
@@ -46,12 +46,7 @@ class MainActivity :
         createUserFragment = CreateUserFragment.newInstance("a", "b")
         quizResultsFragment = QuizResultsFragment.newInstance("a", "b")
 
-        supportFragmentManager
-                .beginTransaction()
-                .add(R.id.fragments_container, chooseQuizFragment)
-                .addToBackStack(chooseQuizFragment.toString())
-                .setTransitionStyle(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                .commit()
+        openFragment(chooseQuizFragment)
     }
 
     override fun onBackPressed() {
