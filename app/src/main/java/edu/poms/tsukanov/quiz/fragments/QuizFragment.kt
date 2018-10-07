@@ -7,13 +7,14 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RadioButton
+import android.widget.RadioGroup
+import android.widget.TextView
 
 import edu.poms.tsukanov.quiz.R
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+private const val QUIZ_NAME = "python"
+private const val QUESTION_NUMBER = "1"
 
 /**
  * A simple [Fragment] subclass.
@@ -26,27 +27,37 @@ private const val ARG_PARAM2 = "param2"
  */
 class QuizFragment : Fragment() {
     // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private var quizName: String? = null
+    private var questionNumber: Int? = null
     private var listener: OnFragmentInteractionListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+            quizName = it.getString(QUIZ_NAME)
+            questionNumber = it.getInt(QUESTION_NUMBER)
         }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_quiz, container, false)
-    }
+        val v = inflater.inflate(R.layout.fragment_quiz, container, false)
 
-    // TODO: Rename method, update argument and hook method into UI event
-    fun onButtonPressed(uri: Uri) {
-        listener?.onFragmentInteraction(uri)
+        val questionLabel: TextView? = v.findViewById(R.id.question)
+        questionLabel?.text = getString(R.string.python_question1)
+
+        val answers = resources.getStringArray(R.array.python_answers1)
+        val answerViews = (1..4).map {
+            v.findViewById<RadioButton>(
+                    resources.getIdentifier("answer$it", "id", activity?.packageName)
+            )
+        }
+        for ((ans, ansView) in answers.zip(answerViews)) {
+            ansView.text = ans
+        }
+
+        return v
     }
 
     override fun onAttach(context: Context) {
@@ -75,26 +86,17 @@ class QuizFragment : Fragment() {
      * for more information.
      */
     interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         fun onFragmentInteraction(uri: Uri)
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment QuizFragment.
-         */
-        // TODO: Rename and change types and number of parameters
+
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance(quizName: String, questionNumber: String) =
                 QuizFragment().apply {
                     arguments = Bundle().apply {
-                        putString(ARG_PARAM1, param1)
-                        putString(ARG_PARAM2, param2)
+                        putString(QUIZ_NAME, quizName)
+                        putString(QUESTION_NUMBER, questionNumber)
                     }
                 }
     }

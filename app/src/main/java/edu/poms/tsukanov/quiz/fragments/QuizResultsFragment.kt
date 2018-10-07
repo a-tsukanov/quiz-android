@@ -44,11 +44,6 @@ class QuizResultsFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_quiz_results, container, false)
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    fun onButtonPressed(uri: Uri) {
-        listener?.onFragmentInteraction(uri)
-    }
-
     override fun onAttach(context: Context) {
         super.onAttach(context)
         if (context is OnFragmentInteractionListener) {

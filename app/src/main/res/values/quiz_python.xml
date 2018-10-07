@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="python_question1">В честь чего назван язык Python?</string>
+    <string-array name="python_answers1">
+        <item>Род змей семейства питонов</item>
+        <item>Комик-группа Монти Пайтон</item>
+        <item>Шестизарядный револьвер Colt Python</item>
+        <item>Мифическое чудовище Пифон</item>
+    </string-array>
+    <integer name="python_correct1">2</integer>
+
+    <string name="python_question2">Какой является система типов Python?</string>
+    <string-array name="python_answers2">
+        <item>Сильная, статическая</item>
+        <item>Слабая, статическая</item>
+        <item>Сильная, динамическая</item>
+        <item>Слабая, динамическая</item>
+    </string-array>
+    <integer name="python_correct2">3</integer>
+
+</resources>
