@@ -8,13 +8,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
-import android.widget.RadioGroup
 import android.widget.TextView
 
 import edu.poms.tsukanov.quiz.R
 
-private const val QUIZ_NAME = "python"
-private const val QUESTION_NUMBER = "1"
+private const val QUIZ_NAME = "quizName"
+private const val QUESTION_NUMBER = "questionNumber"
 
 /**
  * A simple [Fragment] subclass.
@@ -26,7 +25,7 @@ private const val QUESTION_NUMBER = "1"
  *
  */
 class QuizFragment : Fragment() {
-    // TODO: Rename and change types of parameters
+
     private var quizName: String? = null
     private var questionNumber: Int? = null
     private var listener: OnFragmentInteractionListener? = null
@@ -45,9 +44,21 @@ class QuizFragment : Fragment() {
         val v = inflater.inflate(R.layout.fragment_quiz, container, false)
 
         val questionLabel: TextView? = v.findViewById(R.id.question)
-        questionLabel?.text = getString(R.string.python_question1)
+        questionLabel?.text = resources.getText(
+                resources.getIdentifier(
+                        "${quizName}_question$questionNumber",
+                        "string",
+                        activity?.packageName
+                )
+        )
 
-        val answers = resources.getStringArray(R.array.python_answers1)
+        val answers = resources.getStringArray(
+                resources.getIdentifier(
+                        "${quizName}_answers$questionNumber",
+                        "array",
+                        activity?.packageName
+                )
+        )
         val answerViews = (1..4).map {
             v.findViewById<RadioButton>(
                     resources.getIdentifier("answer$it", "id", activity?.packageName)
@@ -92,11 +103,11 @@ class QuizFragment : Fragment() {
     companion object {
 
         @JvmStatic
-        fun newInstance(quizName: String, questionNumber: String) =
+        fun newInstance(quizName: String, questionNumber: Int) =
                 QuizFragment().apply {
                     arguments = Bundle().apply {
                         putString(QUIZ_NAME, quizName)
-                        putString(QUESTION_NUMBER, questionNumber)
+                        putInt(QUESTION_NUMBER, questionNumber)
                     }
                 }
     }

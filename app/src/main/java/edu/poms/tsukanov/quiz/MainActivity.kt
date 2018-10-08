@@ -42,7 +42,7 @@ class MainActivity :
         nav_view.setNavigationItemSelectedListener(this)
 
         chooseQuizFragment = ChooseQuizFragment.newInstance()
-        quizFragment = QuizFragment.newInstance("a", "b")
+        quizFragment = QuizFragment.newInstance("python", 1)
         createUserFragment = CreateUserFragment.newInstance("a", "b")
         quizResultsFragment = QuizResultsFragment.newInstance("a", "b")
 
