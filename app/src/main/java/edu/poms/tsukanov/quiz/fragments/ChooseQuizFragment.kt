@@ -35,13 +35,8 @@ class ChooseQuizFragment : Fragment() {
 
         super.onActivityCreated(savedInstanceState)
         quiz1 = activity!!.findViewById(R.id.quiz1)
-        quizFragment = QuizFragment.newInstance("python", 1)
-        quiz1.setOnClickListener {
-            activity?.supportFragmentManager!!.beginTransaction()
-                    .replace(R.id.fragments_container, quizFragment)
-                    .addToBackStack(quizFragment.toString())
-                    .setTransitionStyle(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                    .commit() }
+        quizFragment = QuizFragment.newInstance("python", 1, startNewQuiz = true)
+        quiz1.setOnClickListener { openFragment(quizFragment) }
     }
 
 

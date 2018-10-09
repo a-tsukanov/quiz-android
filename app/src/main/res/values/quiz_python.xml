@@ -19,4 +19,77 @@
     </string-array>
     <integer name="python_correct2">3</integer>
 
+    <string name="python_question3">Какой инструкции в Python НЕ может соостветствовать else-блок?</string>
+    <string-array name="python_answers3">
+        <item>if</item>
+        <item>try</item>
+        <item>while</item>
+        <item>with</item>
+    </string-array>
+    <integer name="python_correct3">4</integer>
+
+    <string name="python_question4">Поддерживает ли Python множественное наследование?</string>
+    <string-array name="python_answers4">
+        <item>Да</item>
+        <item>Нет</item>
+        <item>Нет - для классов, да - для интерфейсов</item>
+        <item>Только для dataclass</item>
+    </string-array>
+    <integer name="python_correct4">1</integer>
+
+    <string name="python_question5">Какая реализация Python является эталонной?</string>
+    <string-array name="python_answers5">
+        <item>IronPython</item>
+        <item>Jython</item>
+        <item>CPython</item>
+        <item>PyPy</item>
+    </string-array>
+    <integer name="python_correct5">3</integer>
+
+    <string name="python_question6">Что такое REPL?</string>
+    <string-array name="python_answers6">
+        <item>Аналог рабочих предложений (RFC) в Python-сообществе</item>
+        <item>Окружение для командной строки, выполняющее язык в интерактивном режиме</item>
+        <item>Стандарт синтаксиса языка Python</item>
+        <item>Веб-бэкенд микрофреймворк</item>
+    </string-array>
+    <integer name="python_correct6">2</integer>
+
+    <string name="python_question7">Для чего нужны виртуальные окружения Python?</string>
+    <string-array name="python_answers7">
+        <item>Для работы с удалёнными сервисами</item>
+        <item>Для программирования дополненной и виртуальной реальности</item>
+        <item>Чтобы предотвратить конфликты версий библиотек между разными проектами</item>
+        <item>Для лицензирования установленного интерпретатора</item>
+    </string-array>
+    <integer name="python_correct7">3</integer>
+
+    <string name="python_question8">Как можно организовать аналог оператора switch в языке Python?</string>
+    <string-array name="python_answers8">
+        <item>Использовать if, elif, else</item>
+        <item>С помощью сопоставления с образцом в блоке match</item>
+        <item>Использовать инструкцию when</item>
+        <item>Использовать декоратор @case из стандартной библиотеки</item>
+    </string-array>
+    <integer name="python_correct8">1</integer>
+
+    <string name="python_question9">Какой из перечисленных продуктов написан с использованием Python?</string>
+    <string-array name="python_answers9">
+        <item>Instagram</item>
+        <item>Веб-приложение Яндекса для поиска</item>
+        <item>Youtube</item>
+        <item>Все перечисленные</item>
+    </string-array>
+    <integer name="python_correct9">4</integer>
+
+    <string name="python_question10">Что такое Anaconda?</string>
+    <string-array name="python_answers10">
+        <item>Веб-бэкенд микрофреймворк</item>
+        <item>Библиотека для машинного обучения</item>
+        <item>Дистрибутив Python, содержащий предустановленные библиотеки</item>
+        <item>Дистрибутив Linux, содержащий инструменты для работы с Python</item>
+    </string-array>
+    <integer name="python_correct10">3</integer>
+
+
 </resources>

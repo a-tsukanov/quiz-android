@@ -22,7 +22,8 @@ class MainActivity :
         NavigationView.OnNavigationItemSelectedListener,
         ChooseQuizFragment.OnFragmentInteractionListener,
         CreateUserFragment.OnFragmentInteractionListener,
-        QuizFragment.OnFragmentInteractionListener {
+        QuizFragment.OnFragmentInteractionListener,
+        QuizResultsFragment.OnFragmentInteractionListener {
 
     lateinit var chooseQuizFragment: ChooseQuizFragment
     lateinit var quizFragment: QuizFragment
@@ -34,19 +35,27 @@ class MainActivity :
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
+        initToggle()
+
+        nav_view.setNavigationItemSelectedListener(this)
+
+        initFragments()
+
+        openFragment(chooseQuizFragment)
+    }
+
+    private fun initToggle() {
         val toggle = ActionBarDrawerToggle(
                 this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
+    }
 
-        nav_view.setNavigationItemSelectedListener(this)
-
+    private fun initFragments() {
         chooseQuizFragment = ChooseQuizFragment.newInstance()
         quizFragment = QuizFragment.newInstance("python", 1)
         createUserFragment = CreateUserFragment.newInstance("a", "b")
         quizResultsFragment = QuizResultsFragment.newInstance("a", "b")
-
-        openFragment(chooseQuizFragment)
     }
 
     override fun onBackPressed() {

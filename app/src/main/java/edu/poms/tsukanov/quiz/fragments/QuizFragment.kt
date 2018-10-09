@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.RadioButton
 import android.widget.TextView
 
@@ -14,6 +15,8 @@ import edu.poms.tsukanov.quiz.R
 
 private const val QUIZ_NAME = "quizName"
 private const val QUESTION_NUMBER = "questionNumber"
+
+private const val QUESTIONS_PER_QUIZ = 10
 
 /**
  * A simple [Fragment] subclass.
@@ -40,7 +43,7 @@ class QuizFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
+
         val v = inflater.inflate(R.layout.fragment_quiz, container, false)
 
         val questionLabel: TextView? = v.findViewById(R.id.question)
@@ -67,6 +70,27 @@ class QuizFragment : Fragment() {
         for ((ans, ansView) in answers.zip(answerViews)) {
             ansView.text = ans
         }
+
+        val btnNext: Button = v.findViewById(R.id.btnForward)
+
+        fun getNextFragment(): Fragment {
+            return when (questionNumber) {
+                QUESTIONS_PER_QUIZ -> QuizResultsFragment.newInstance("a", "b")
+
+                lastAnsweredNumber + 1 -> {
+                    lastAnsweredNumber += 1
+                    QuizFragment.newInstance(
+                            quizName!!.toString(),
+                            questionNumber!!.toInt() + 1)
+                }
+                else -> QuizFragment.newInstance(
+                        quizName!!.toString(),
+                        lastAnsweredNumber + 1)
+            }
+        }
+        val nextFragment: Fragment by lazy { getNextFragment() }
+
+        btnNext.setOnClickListener { openFragment(nextFragment) }
 
         return v
     }
@@ -102,13 +126,19 @@ class QuizFragment : Fragment() {
 
     companion object {
 
+        var lastAnsweredNumber = 0
+
         @JvmStatic
-        fun newInstance(quizName: String, questionNumber: Int) =
-                QuizFragment().apply {
-                    arguments = Bundle().apply {
-                        putString(QUIZ_NAME, quizName)
-                        putInt(QUESTION_NUMBER, questionNumber)
-                    }
+        fun newInstance(quizName: String, questionNumber: Int, startNewQuiz: Boolean = false): QuizFragment {
+            if (startNewQuiz) {
+                lastAnsweredNumber = 0
+            }
+            return QuizFragment().apply {
+                arguments = Bundle().apply {
+                    putString(QUIZ_NAME, quizName)
+                    putInt(QUESTION_NUMBER, questionNumber)
                 }
+            }
+        }
     }
 }
