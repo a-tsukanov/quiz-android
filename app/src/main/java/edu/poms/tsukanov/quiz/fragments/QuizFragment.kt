@@ -117,8 +117,8 @@ class QuizFragment : Fragment() {
 
     private fun handleAnswerButton() {
         fun prepareAndOpenFragment() {
-            qp.currentNumber += 1
             val nextFragment = createNextFragment()
+            qp.currentNumber += 1
 
             openFragment(nextFragment)
         }
@@ -128,15 +128,13 @@ class QuizFragment : Fragment() {
         } else {
             btnForward.isEnabled = false
             (0..3).map {radioGroup.getChildAt(it).isEnabled = false }
-            Snackbar
-                    .make(view!!, "Correct answer is the ${getCorrectAnswerStr()}",
+            Snackbar.make(view!!, "Correct answer is the ${getCorrectAnswerStr()}",
                         Snackbar.LENGTH_INDEFINITE)
                     .setAction("OK") { _ ->
                         prepareAndOpenFragment()
                     }
                     .show()
         }
-
     }
 
     override fun onAttach(context: Context) {

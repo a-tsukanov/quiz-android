@@ -28,17 +28,24 @@ import kotlinx.android.synthetic.main.fragment_choose_quiz.*
 class ChooseQuizFragment : Fragment() {
     private var listener: OnFragmentInteractionListener? = null
 
-    lateinit var quizFragment: QuizFragment
-    lateinit var quiz1: ImageButton
-
     override fun onActivityCreated(savedInstanceState: Bundle?) {
 
         super.onActivityCreated(savedInstanceState)
-        quiz1 = activity!!.findViewById(R.id.quiz1)
 
-        val quizPassage = QuizPassage("python", 10)
-        quizFragment = QuizFragment.newInstance(quizPassage)
-        quiz1.setOnClickListener { openFragment(quizFragment) }
+        val quiz1: ImageButton = activity!!.findViewById(R.id.quiz1)
+        quiz1.setOnClickListener {
+            val pythonQuizPassage = QuizPassage("python", 10)
+            val pythonQuizFragment = QuizFragment.newInstance(pythonQuizPassage)
+            openFragment(pythonQuizFragment)
+        }
+
+        val quiz2: ImageButton = activity!!.findViewById(R.id.quiz2)
+        quiz2.setOnClickListener {
+            val lawQuizPassage = QuizPassage("law", 11)
+            val lawQuizFragment = QuizFragment.newInstance(lawQuizPassage)
+            openFragment(lawQuizFragment)
+        }
+
     }
 
 

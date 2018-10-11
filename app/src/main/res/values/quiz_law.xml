@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="law_question1">Сколько государств-членов в ООН?</string>
+    <string-array name="law_answers1">
+        <item>190</item>
+        <item>187</item>
+        <item>193</item>
+        <item>145</item>
+    </string-array>
+    <integer name="law_correct1">3</integer>
+
+    <string name="law_question2">Какого принципа не существует в МПП?</string>
+    <string-array name="law_answers2">
+        <item>Самоопределения</item>
+        <item>Сотрудничества государств</item>
+        <item>Мирного разрешения споров</item>
+        <item>Разоружения</item>
+    </string-array>
+    <integer name="law_correct2">4</integer>
+
+    <string name="law_question3">Первое высшее должностное лицо, которое осудил суд другого государства</string>
+    <string-array name="law_answers3">
+        <item>Мария Стюарт</item>
+        <item>Джон Кеннеди</item>
+        <item>Дональд Трамп</item>
+        <item>Мэттью Беллами</item>
+    </string-array>
+    <integer name="law_correct3">1</integer>
+
+    <string name="law_question4">Деятельность государств по воплощению в жизнь предписаний, содержащихся в нормах МП, это:</string>
+    <string-array name="law_answers4">
+        <item>Колификация</item>
+        <item>Фрагментация</item>
+        <item>Имплементация</item>
+        <item>Вариация</item>
+    </string-array>
+    <integer name="law_correct4">3</integer>
+
+    <string name="law_question5">Утрата права требования на признание договора недействительным - это:</string>
+    <string-array name="law_answers5">
+        <item>Эстопель</item>
+        <item>Сатисфакция</item>
+        <item>Правопреемство</item>
+        <item>PyPy</item>
+    </string-array>
+    <integer name="law_correct5">1</integer>
+
+    <string name="law_question6">Главный по старшенству дипломатический представитель:</string>
+    <string-array name="law_answers6">
+        <item>Нунций</item>
+        <item>Интернунций</item>
+        <item>Агреман</item>
+        <item>Дуайен</item>
+    </string-array>
+    <integer name="law_correct6">4</integer>
+
+    <string name="law_question7">Имя верховного комиссара по правам человека ООН:</string>
+    <string-array name="law_answers7">
+        <item>Зейд Раад Аль Хуссейн</item>
+        <item>Пан Ги Мун</item>
+        <item>Миклош Харасти</item>
+        <item>Дэвид Теннант</item>
+    </string-array>
+    <integer name="law_correct7">1</integer>
+
+    <string name="law_question8">Год создания ООН:</string>
+    <string-array name="law_answers8">
+        <item>1945</item>
+        <item>1678</item>
+        <item>1987</item>
+        <item>1547</item>
+    </string-array>
+    <integer name="law_correct8">1</integer>
+
+    <string name="law_question9">Сколько комитетов существует в системе защиты прав человека ООН?</string>
+    <string-array name="law_answers9">
+        <item>9</item>
+        <item>8</item>
+        <item>10</item>
+        <item>5</item>
+    </string-array>
+    <integer name="law_correct9">3</integer>
+
+    <string name="law_question10">Первое дело комитета ликвидации дискриминации в отношении женщин против РБ:</string>
+    <string-array name="law_answers10">
+        <item>Алла Макей</item>
+        <item>Алла Игорян</item>
+        <item>Инга Абрамова</item>
+        <item>Алла Васильева</item>
+    </string-array>
+    <integer name="law_correct10">3</integer>
+
+    <string name="law_question11">Членом какой организации не является республика Беларусь?</string>
+    <string-array name="law_answers11">
+        <item>ШОС</item>
+        <item>ООН</item>
+        <item>СНГ</item>
+        <item>ШОС и СНГ</item>
+    </string-array>
+    <integer name="law_correct11">1</integer>
+
+</resources>
