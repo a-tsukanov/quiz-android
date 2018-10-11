@@ -35,20 +35,16 @@ class ChooseQuizFragment : Fragment() {
 
         super.onActivityCreated(savedInstanceState)
         quiz1 = activity!!.findViewById(R.id.quiz1)
-        quizFragment = QuizFragment.newInstance("python", 1, startNewQuiz = true)
+
+        val quizPassage = QuizPassage("python", 10)
+        quizFragment = QuizFragment.newInstance(quizPassage)
         quiz1.setOnClickListener { openFragment(quizFragment) }
     }
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-
-
-
         return inflater.inflate(R.layout.fragment_choose_quiz, container, false)
-
-
     }
 
     override fun onAttach(context: Context) {

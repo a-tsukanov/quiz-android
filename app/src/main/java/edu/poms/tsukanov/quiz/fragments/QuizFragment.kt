@@ -13,87 +13,65 @@ import android.widget.TextView
 
 import edu.poms.tsukanov.quiz.R
 
-private const val QUIZ_NAME = "quizName"
-private const val QUESTION_NUMBER = "questionNumber"
 
-private const val QUESTIONS_PER_QUIZ = 10
-
-/**
- * A simple [Fragment] subclass.
- * Activities that contain this fragment must implement the
- * [QuizFragment.OnFragmentInteractionListener] interface
- * to handle interaction events.
- * Use the [QuizFragment.newInstance] factory method to
- * create an instance of this fragment.
- *
- */
 class QuizFragment : Fragment() {
 
-    private var quizName: String? = null
-    private var questionNumber: Int? = null
     private var listener: OnFragmentInteractionListener? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            quizName = it.getString(QUIZ_NAME)
-            questionNumber = it.getInt(QUESTION_NUMBER)
-        }
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
-        val v = inflater.inflate(R.layout.fragment_quiz, container, false)
+        val layout = inflater.inflate(R.layout.fragment_quiz, container, false)
 
-        val questionLabel: TextView? = v.findViewById(R.id.question)
+        setQuestionText(layout)
+        setAnswersText(layout)
+
+        val btnNext: Button = layout.findViewById(R.id.btnForward)
+        btnNext.setOnClickListener {
+            if (isAnswerCorrect()) {
+                qp.correctCounter += 1
+            }
+            qp.currentNumber += 1
+            val nextFragment = QuizFragment.newInstance()
+            openFragment(nextFragment)
+        }
+
+        return layout
+    }
+
+    private fun setQuestionText(layout: View) {
+        val questionLabel: TextView? = layout.findViewById(R.id.question)
         questionLabel?.text = resources.getText(
                 resources.getIdentifier(
-                        "${quizName}_question$questionNumber",
+                        "${qp.name}_question${qp.currentNumber}",
                         "string",
                         activity?.packageName
                 )
         )
+    }
 
+    private fun setAnswersText(layout: View) {
         val answers = resources.getStringArray(
                 resources.getIdentifier(
-                        "${quizName}_answers$questionNumber",
+                        "${qp.name}_answers${qp.currentNumber}",
                         "array",
                         activity?.packageName
                 )
         )
         val answerViews = (1..4).map {
-            v.findViewById<RadioButton>(
+            layout.findViewById<RadioButton>(
                     resources.getIdentifier("answer$it", "id", activity?.packageName)
             )
         }
         for ((ans, ansView) in answers.zip(answerViews)) {
             ansView.text = ans
         }
-
-        val btnNext: Button = v.findViewById(R.id.btnForward)
-
-        fun getNextFragment(): Fragment {
-            return when (questionNumber) {
-                QUESTIONS_PER_QUIZ -> QuizResultsFragment.newInstance("a", "b")
-
-                lastAnsweredNumber + 1 -> {
-                    lastAnsweredNumber += 1
-                    QuizFragment.newInstance(
-                            quizName!!.toString(),
-                            questionNumber!!.toInt() + 1)
-                }
-                else -> QuizFragment.newInstance(
-                        quizName!!.toString(),
-                        lastAnsweredNumber + 1)
-            }
-        }
-        val nextFragment: Fragment by lazy { getNextFragment() }
-
-        btnNext.setOnClickListener { openFragment(nextFragment) }
-
-        return v
     }
+
+    private fun isAnswerCorrect(): Boolean {
+        return true
+    }
+
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -109,36 +87,21 @@ class QuizFragment : Fragment() {
         listener = null
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     *
-     *
-     * See the Android Training lesson [Communicating with Other Fragments]
-     * (http://developer.android.com/training/basics/fragments/communicating.html)
-     * for more information.
-     */
     interface OnFragmentInteractionListener {
         fun onFragmentInteraction(uri: Uri)
     }
 
     companion object {
 
-        var lastAnsweredNumber = 0
+        lateinit var qp: QuizPassage
 
         @JvmStatic
-        fun newInstance(quizName: String, questionNumber: Int, startNewQuiz: Boolean = false): QuizFragment {
-            if (startNewQuiz) {
-                lastAnsweredNumber = 0
+        fun newInstance(quizPassage: QuizPassage? = null): QuizFragment {
+            if(quizPassage != null) {
+                QuizFragment.qp = quizPassage
             }
-            return QuizFragment().apply {
-                arguments = Bundle().apply {
-                    putString(QUIZ_NAME, quizName)
-                    putInt(QUESTION_NUMBER, questionNumber)
-                }
-            }
+            return QuizFragment()
+
         }
     }
 }

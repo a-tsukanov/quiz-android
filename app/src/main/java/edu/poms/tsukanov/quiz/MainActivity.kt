@@ -10,10 +10,7 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import edu.poms.tsukanov.quiz.fragments.ChooseQuizFragment
-import edu.poms.tsukanov.quiz.fragments.CreateUserFragment
-import edu.poms.tsukanov.quiz.fragments.QuizFragment
-import edu.poms.tsukanov.quiz.fragments.QuizResultsFragment
+import edu.poms.tsukanov.quiz.fragments.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 
@@ -53,7 +50,7 @@ class MainActivity :
 
     private fun initFragments() {
         chooseQuizFragment = ChooseQuizFragment.newInstance()
-        quizFragment = QuizFragment.newInstance("python", 1)
+        quizFragment = QuizFragment.newInstance(QuizPassage("python", 10))
         createUserFragment = CreateUserFragment.newInstance("a", "b")
         quizResultsFragment = QuizResultsFragment.newInstance("a", "b")
     }
