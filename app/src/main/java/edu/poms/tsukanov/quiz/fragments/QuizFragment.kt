@@ -3,20 +3,28 @@ package edu.poms.tsukanov.quiz.fragments
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
+import android.support.design.widget.CoordinatorLayout
+import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.RadioButton
-import android.widget.TextView
+import android.widget.*
 
 import edu.poms.tsukanov.quiz.R
+import kotlinx.android.synthetic.main.fragment_quiz.*
 
 
 class QuizFragment : Fragment() {
 
     private var listener: OnFragmentInteractionListener? = null
+    private lateinit var thisPackage: String
+    private lateinit var radioGroup: RadioGroup
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        thisPackage = activity!!.packageName
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -26,14 +34,14 @@ class QuizFragment : Fragment() {
         setQuestionText(layout)
         setAnswersText(layout)
 
-        val btnNext: Button = layout.findViewById(R.id.btnForward)
-        btnNext.setOnClickListener {
-            if (isAnswerCorrect()) {
-                qp.correctCounter += 1
-            }
-            qp.currentNumber += 1
-            val nextFragment = QuizFragment.newInstance()
-            openFragment(nextFragment)
+        val btnConfirm: Button = layout.findViewById(R.id.btnForward)
+        btnConfirm.setOnClickListener {
+            handleAnswerButton()
+        }
+
+        radioGroup = layout.findViewById(R.id.answers_radio_group)
+        radioGroup.setOnCheckedChangeListener { _, _ ->
+            btnConfirm.isEnabled = true
         }
 
         return layout
@@ -45,7 +53,7 @@ class QuizFragment : Fragment() {
                 resources.getIdentifier(
                         "${qp.name}_question${qp.currentNumber}",
                         "string",
-                        activity?.packageName
+                        thisPackage
                 )
         )
     }
@@ -55,7 +63,7 @@ class QuizFragment : Fragment() {
                 resources.getIdentifier(
                         "${qp.name}_answers${qp.currentNumber}",
                         "array",
-                        activity?.packageName
+                        thisPackage
                 )
         )
         val answerViews = (1..4).map {
@@ -68,10 +76,68 @@ class QuizFragment : Fragment() {
         }
     }
 
-    private fun isAnswerCorrect(): Boolean {
-        return true
+    private fun getCorrectAnswer(): Int =
+            resources.getInteger(
+                    resources.getIdentifier(
+                            "${qp.name}_correct${qp.currentNumber}",
+                            "integer",
+                            thisPackage
+                    )
+            )
+
+    private val isAnswerCorrect: Boolean
+        get() {
+
+            fun getUserAnswer(): Int {
+                val selectedId = radioGroup.checkedRadioButtonId
+                val selectedBtn: Button = radioGroup.findViewById(selectedId)
+                return radioGroup.indexOfChild(selectedBtn) + 1
+            }
+
+            val (correctAnswer, userAnswer) = listOf(getCorrectAnswer(), getUserAnswer())
+            return correctAnswer == userAnswer
+        }
+
+    private fun createNextFragment() = if (qp.currentNumber < qp.numberOfQuestions) {
+            QuizFragment.newInstance()
+        } else {
+            QuizResultsFragment.newInstance(qp)
     }
 
+    private fun getCorrectAnswerStr(): String {
+        val correct = getCorrectAnswer()
+        return when (correct) {
+            1 -> "1st"
+            2 -> "2nd"
+            3 -> "3rd"
+            4 -> "4th"
+            else -> throw IllegalArgumentException()
+        }
+    }
+
+    private fun handleAnswerButton() {
+        fun prepareAndOpenFragment() {
+            qp.currentNumber += 1
+            val nextFragment = createNextFragment()
+
+            openFragment(nextFragment)
+        }
+        if (isAnswerCorrect) {
+            qp.correctCounter += 1
+            prepareAndOpenFragment()
+        } else {
+            btnForward.isEnabled = false
+            (0..3).map {radioGroup.getChildAt(it).isEnabled = false }
+            Snackbar
+                    .make(view!!, "Correct answer is the ${getCorrectAnswerStr()}",
+                        Snackbar.LENGTH_INDEFINITE)
+                    .setAction("OK") { _ ->
+                        prepareAndOpenFragment()
+                    }
+                    .show()
+        }
+
+    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -97,11 +163,10 @@ class QuizFragment : Fragment() {
 
         @JvmStatic
         fun newInstance(quizPassage: QuizPassage? = null): QuizFragment {
-            if(quizPassage != null) {
+            if (quizPassage != null) {
                 QuizFragment.qp = quizPassage
             }
             return QuizFragment()
-
         }
     }
 }

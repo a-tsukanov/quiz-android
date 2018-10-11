@@ -49,10 +49,12 @@ class MainActivity :
     }
 
     private fun initFragments() {
+        val defaultQp = QuizPassage("python", 10)
+
         chooseQuizFragment = ChooseQuizFragment.newInstance()
-        quizFragment = QuizFragment.newInstance(QuizPassage("python", 10))
+        quizFragment = QuizFragment.newInstance(defaultQp)
         createUserFragment = CreateUserFragment.newInstance("a", "b")
-        quizResultsFragment = QuizResultsFragment.newInstance("a", "b")
+        quizResultsFragment = QuizResultsFragment.newInstance(defaultQp)
     }
 
     override fun onBackPressed() {

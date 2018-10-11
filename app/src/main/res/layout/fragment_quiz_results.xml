@@ -5,8 +5,8 @@
     tools:context="edu.poms.tsukanov.quiz.fragments.QuizResultsFragment">
 
     <TextView
+        android:id="@+id/resultsText"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Here you will see how good you were at the quiz" />
+        android:layout_height="match_parent" />
 
 </FrameLayout>
