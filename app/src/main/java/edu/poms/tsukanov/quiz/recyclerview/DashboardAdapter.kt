@@ -27,7 +27,11 @@ class DashboardAdapter(private val records: List<QuizResults>)
         val record = records[position]
         percantageText.text = "${record.percentage}%"
         usernameText.text = record.username
-        topicText.text = record.quizName
+        topicText.text = record
+                .quizName
+                ?.split('_')
+                ?.map { it.capitalize() }
+                ?.joinToString(" ")
     }
 
     override fun getItemCount(): Int = records.size
