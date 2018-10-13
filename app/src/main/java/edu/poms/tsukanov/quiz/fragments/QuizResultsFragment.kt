@@ -9,8 +9,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import edu.poms.tsukanov.quiz.MainActivity
 
 import edu.poms.tsukanov.quiz.R
+import edu.poms.tsukanov.quiz.database.QuizResults
 import edu.poms.tsukanov.quiz.passage.QuizPassage
 
 
@@ -20,9 +22,16 @@ class QuizResultsFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
+        val result = setResult()
+
+        updateDb(result)
+
         val layout = inflater.inflate(R.layout.fragment_quiz_results, container, false)
         val text: TextView = layout.findViewById(R.id.resultsText)
-        text.text = "${qp.correctCounter} of ${qp.numberOfQuestions} correct"
+        text.text =
+                "${result.username}: " +
+                "${result.correct} из ${result.total} правильно " +
+                "(${result.percentage}%)"
 
         val fab: FloatingActionButton = layout.findViewById(R.id.floatingActionButton)
         fab.setOnClickListener {
@@ -31,6 +40,18 @@ class QuizResultsFragment : Fragment() {
         }
 
         return layout
+    }
+
+    private fun setResult(): QuizResults = QuizResults().apply {
+        quizName = qp.name
+        username = qp.username
+        correct = qp.correctCounter
+        total = qp.numberOfQuestions
+        percentage = (qp.correctCounter.toDouble() / qp.numberOfQuestions.toDouble() * 100).toInt()
+    }
+
+    private fun updateDb(result: QuizResults) {
+        MainActivity.db.dao().add(result)
     }
 
     override fun onAttach(context: Context) {

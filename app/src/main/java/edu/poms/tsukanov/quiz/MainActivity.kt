@@ -1,6 +1,7 @@
 package edu.poms.tsukanov.quiz
 
 import android.arch.persistence.room.Room
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.support.design.widget.NavigationView
@@ -11,12 +12,13 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import edu.poms.tsukanov.quiz.database.QuizResults
 import edu.poms.tsukanov.quiz.database.QuizResultsDb
 import edu.poms.tsukanov.quiz.fragments.*
+import edu.poms.tsukanov.quiz.fragments.dummy.DashboardContent
 import edu.poms.tsukanov.quiz.passage.QuizPassage
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
+import java.lang.RuntimeException
 
 class MainActivity :
         AppCompatActivity(),
@@ -24,7 +26,8 @@ class MainActivity :
         ChooseQuizFragment.OnFragmentInteractionListener,
         CreateUserFragment.OnFragmentInteractionListener,
         QuizFragment.OnFragmentInteractionListener,
-        QuizResultsFragment.OnFragmentInteractionListener {
+        QuizResultsFragment.OnFragmentInteractionListener,
+        DashboardFragment.OnListFragmentInteractionListener {
 
     lateinit var chooseQuizFragment: ChooseQuizFragment
     lateinit var quizFragment: QuizFragment
@@ -33,10 +36,11 @@ class MainActivity :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         db = Room.databaseBuilder(
-                applicationContext,
-                QuizResultsDb::class.java,
-                "results_db"
-        ).build()
+                    applicationContext,
+                    QuizResultsDb::class.java,
+                    "results_db")
+                .allowMainThreadQueries()
+                .build()
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -85,33 +89,32 @@ class MainActivity :
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        when (item.itemId) {
-            R.id.action_settings -> return true
-            else -> return super.onOptionsItemSelected(item)
+        return when (item.itemId) {
+            R.id.action_about -> {
+                val about = Intent(this, AboutActivity::class.java)
+                startActivity(about)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.nav_start_quiz -> {
-                openFragment(chooseQuizFragment)
-            }
-            R.id.nav_dashboard -> {
-
-            }
-            R.id.nav_switch_user -> {
-
-            }
-            R.id.nav_new_user -> {
-                openFragment(createUserFragment)
-            }
+        val nextFragment = when (item.itemId) {
+            R.id.nav_start_quiz -> chooseQuizFragment
+            R.id.nav_dashboard -> DashboardFragment.newInstance()
+            else -> throw RuntimeException("Unknown item chosen")
         }
-
+        openFragment(nextFragment)
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
     }
 
     override fun onFragmentInteraction(uri: Uri) {
+
+    }
+
+    override fun onListFragmentInteraction() {
 
     }
 
