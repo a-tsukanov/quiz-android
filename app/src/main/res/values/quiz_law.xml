@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="law_question1">Сколько государств-членов в ООН?</string>
+    <string name="law_question1">Сколько государств являются членами ООН?</string>
     <string-array name="law_answers1">
         <item>190</item>
         <item>187</item>
@@ -10,7 +10,7 @@
     </string-array>
     <integer name="law_correct1">3</integer>
 
-    <string name="law_question2">Какого принципа не существует в МПП?</string>
+    <string name="law_question2">Какого принципа не существует в международном публичном праве?</string>
     <string-array name="law_answers2">
         <item>Самоопределения</item>
         <item>Сотрудничества государств</item>
@@ -28,7 +28,7 @@
     </string-array>
     <integer name="law_correct3">1</integer>
 
-    <string name="law_question4">Деятельность государств по воплощению в жизнь предписаний, содержащихся в нормах МП, это:</string>
+    <string name="law_question4">Деятельность государств по воплощению в жизнь предписаний, содержащихся в нормах международного права, это:</string>
     <string-array name="law_answers4">
         <item>Колификация</item>
         <item>Фрагментация</item>
@@ -42,7 +42,7 @@
         <item>Эстопель</item>
         <item>Сатисфакция</item>
         <item>Правопреемство</item>
-        <item>PyPy</item>
+        <item>Оговорка</item>
     </string-array>
     <integer name="law_correct5">1</integer>
 

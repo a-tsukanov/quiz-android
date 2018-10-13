@@ -4,27 +4,15 @@ import android.content.Context
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentTransaction
-import android.support.v7.widget.AppCompatImageButton
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageButton
 
 import edu.poms.tsukanov.quiz.R
-import kotlinx.android.synthetic.main.fragment_choose_quiz.*
+import edu.poms.tsukanov.quiz.passage.QuizPassage
 
 
-/**
- * A simple [Fragment] subclass.
- * Activities that contain this fragment must implement the
- * [ChooseQuizFragment.OnFragmentInteractionListener] interface
- * to handle interaction events.
- * Use the [ChooseQuizFragment.newInstance] factory method to
- * create an instance of this fragment.
- *
- */
 class ChooseQuizFragment : Fragment() {
     private var listener: OnFragmentInteractionListener? = null
 
@@ -34,20 +22,17 @@ class ChooseQuizFragment : Fragment() {
 
         val quiz1: ImageButton = activity!!.findViewById(R.id.quiz1)
         quiz1.setOnClickListener {
-            val pythonQuizPassage = QuizPassage("python", 10)
-            val pythonQuizFragment = QuizFragment.newInstance(pythonQuizPassage)
-            openFragment(pythonQuizFragment)
+            val pythonSetUserFragment = CreateUserFragment.newInstance("python", 10)
+            openFragment(pythonSetUserFragment)
         }
 
         val quiz2: ImageButton = activity!!.findViewById(R.id.quiz2)
         quiz2.setOnClickListener {
-            val lawQuizPassage = QuizPassage("law", 11)
-            val lawQuizFragment = QuizFragment.newInstance(lawQuizPassage)
-            openFragment(lawQuizFragment)
+            val lawSetUserFragment = CreateUserFragment.newInstance("law", 11)
+            openFragment(lawSetUserFragment)
         }
 
     }
-
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -68,17 +53,6 @@ class ChooseQuizFragment : Fragment() {
         listener = null
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     *
-     *
-     * See the Android Training lesson [Communicating with Other Fragments]
-     * (http://developer.android.com/training/basics/fragments/communicating.html)
-     * for more information.
-     */
     interface OnFragmentInteractionListener {
         fun onFragmentInteraction(uri: Uri)
     }

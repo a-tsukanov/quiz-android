@@ -3,7 +3,6 @@ package edu.poms.tsukanov.quiz.fragments
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
-import android.support.design.widget.CoordinatorLayout
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -12,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.*
 
 import edu.poms.tsukanov.quiz.R
+import edu.poms.tsukanov.quiz.passage.QuizPassage
 import kotlinx.android.synthetic.main.fragment_quiz.*
 
 

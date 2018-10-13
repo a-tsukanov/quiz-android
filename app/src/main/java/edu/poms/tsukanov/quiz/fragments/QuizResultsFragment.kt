@@ -3,6 +3,7 @@ package edu.poms.tsukanov.quiz.fragments
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
+import android.support.design.widget.FloatingActionButton
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 
 import edu.poms.tsukanov.quiz.R
+import edu.poms.tsukanov.quiz.passage.QuizPassage
 
 
 class QuizResultsFragment : Fragment() {
@@ -21,6 +23,13 @@ class QuizResultsFragment : Fragment() {
         val layout = inflater.inflate(R.layout.fragment_quiz_results, container, false)
         val text: TextView = layout.findViewById(R.id.resultsText)
         text.text = "${qp.correctCounter} of ${qp.numberOfQuestions} correct"
+
+        val fab: FloatingActionButton = layout.findViewById(R.id.floatingActionButton)
+        fab.setOnClickListener {
+            val fragment = ChooseQuizFragment.newInstance()
+            openFragment(fragment)
+        }
+
         return layout
     }
 

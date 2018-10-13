@@ -1,5 +1,6 @@
 package edu.poms.tsukanov.quiz
 
+import android.arch.persistence.room.Room
 import android.net.Uri
 import android.os.Bundle
 import android.support.design.widget.NavigationView
@@ -10,7 +11,10 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import edu.poms.tsukanov.quiz.database.QuizResults
+import edu.poms.tsukanov.quiz.database.QuizResultsDb
 import edu.poms.tsukanov.quiz.fragments.*
+import edu.poms.tsukanov.quiz.passage.QuizPassage
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 
@@ -28,6 +32,12 @@ class MainActivity :
     lateinit var createUserFragment: CreateUserFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        db = Room.databaseBuilder(
+                applicationContext,
+                QuizResultsDb::class.java,
+                "results_db"
+        ).build()
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
@@ -49,11 +59,11 @@ class MainActivity :
     }
 
     private fun initFragments() {
-        val defaultQp = QuizPassage("python", 10)
+        val defaultQp = QuizPassage("python", 10, "")
 
         chooseQuizFragment = ChooseQuizFragment.newInstance()
         quizFragment = QuizFragment.newInstance(defaultQp)
-        createUserFragment = CreateUserFragment.newInstance("a", "b")
+        createUserFragment = CreateUserFragment.newInstance("python", 10)
         quizResultsFragment = QuizResultsFragment.newInstance(defaultQp)
     }
 
@@ -113,4 +123,9 @@ class MainActivity :
                 .setTransitionStyle(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                 .commit()
     }
+
+    companion object {
+        lateinit var db: QuizResultsDb
+    }
+
 }
