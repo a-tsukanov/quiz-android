@@ -10,16 +10,9 @@ import android.view.View
 import android.view.ViewGroup
 import edu.poms.tsukanov.quiz.MainActivity
 import edu.poms.tsukanov.quiz.R
+import edu.poms.tsukanov.quiz.recyclerview.DashboardAdapter
 
-import edu.poms.tsukanov.quiz.fragments.dummy.DashboardContent
-import edu.poms.tsukanov.quiz.fragments.dummy.DashboardContent.DashboardItem
-import kotlinx.android.synthetic.main.fragment_dashboard_list.*
 
-/**
- * A fragment representing a list of Items.
- * Activities containing this fragment MUST implement the
- * [DashboardFragment.OnListFragmentInteractionListener] interface.
- */
 class DashboardFragment : Fragment() {
 
     private var listener: OnListFragmentInteractionListener? = null

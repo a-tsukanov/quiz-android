@@ -1,19 +1,12 @@
-package edu.poms.tsukanov.quiz.fragments
+package edu.poms.tsukanov.quiz.recyclerview
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import edu.poms.tsukanov.quiz.R
 import edu.poms.tsukanov.quiz.database.QuizResults
-
-
-import edu.poms.tsukanov.quiz.fragments.DashboardFragment.OnListFragmentInteractionListener
-import edu.poms.tsukanov.quiz.fragments.dummy.DashboardContent.DashboardItem
-
-import kotlinx.android.synthetic.main.fragment_dashboard.view.*
 
 
 class DashboardAdapter(private val records: List<QuizResults>)

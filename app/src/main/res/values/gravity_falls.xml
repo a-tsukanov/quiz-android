@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="gravity_falls_question1">Сколько частей дневника?</string>
+    <string-array name="gravity_falls_answers1">
+        <item>1</item>
+        <item>3</item>
+        <item>4</item>
+        <item>2</item>
+    </string-array>
+    <integer name="gravity_falls_correct1">2</integer>
+
+    <string name="gravity_falls_question2">Кем оказался первый парень Мэйбл в Гравити Фоллз?</string>
+    <string-array name="gravity_falls_answers2">
+        <item>Гномами</item>
+        <item>Вампиром</item>
+        <item>Волшебником</item>
+        <item>Гидеоном</item>
+    </string-array>
+    <integer name="gravity_falls_correct2">1</integer>
+
+    <string name="gravity_falls_question3">Кто обезглавил восковую фигуру дяди Стэна?</string>
+    <string-array name="gravity_falls_answers3">
+        <item>Гидеон</item>
+        <item>Мэйбл</item>
+        <item>Восковые фигуры</item>
+        <item>Диппер</item>
+    </string-array>
+    <integer name="gravity_falls_correct3">3</integer>
+
+    <string name="gravity_falls_question4">Как назывался супермаркет с паранормальной активностью?</string>
+    <string-array name="gravity_falls_answers4">
+        <item>"От заката до рассвета"</item>
+        <item>"От рассвета до заката"</item>
+        <item>"Хижина тайн"</item>
+        <item>"Евроопт"</item>
+    </string-array>
+    <integer name="gravity_falls_correct4">1</integer>
+
+    <string name="gravity_falls_question5">Какого монстра встретили герои в бункере автора?</string>
+    <string-array name="gravity_falls_answers5">
+        <item>Гномов</item>
+        <item>Билла Шифра</item>
+        <item>Осьмиклопа</item>
+        <item>Шейп Шифтера</item>
+    </string-array>
+    <integer name="gravity_falls_correct5">4</integer>
+
+    <string name="gravity_falls_question6">Чьё тело в эпизоде с куклами захватил Билл?</string>
+    <string-array name="gravity_falls_answers6">
+        <item>Тело Мэйбл</item>
+        <item>Тело Диппера</item>
+        <item>Тела дяди Стэна</item>
+        <item>Тело Макгакета</item>
+    </string-array>
+    <integer name="gravity_falls_correct6">2</integer>
+
+    <string name="gravity_falls_question7">В кого был влюблен Диппер?</string>
+    <string-array name="gravity_falls_answers7">
+        <item>Зус</item>
+        <item>Пасифика</item>
+        <item>Грэнда</item>
+        <item>Венди</item>
+    </string-array>
+    <integer name="gravity_falls_correct7">4</integer>
+
+    <string name="gravity_falls_question8">Имя путешественника во времени, вызвавшего в последствии Диппера и Мэйбл на дуэль:</string>
+    <string-array name="gravity_falls_answers8">
+        <item>Блендун</item>
+        <item>Блондин</item>
+        <item>Блендин</item>
+        <item>Блендер</item>
+    </string-array>
+    <integer name="gravity_falls_correct8">3</integer>
+
+    <string name="gravity_falls_question9">Какой из этих персонажей появлялся в каждом эпизоде?</string>
+    <string-array name="gravity_falls_answers9">
+        <item>Мэйбл</item>
+        <item>Диппер</item>
+        <item>Стэн</item>
+        <item>Зус</item>
+    </string-array>
+    <integer name="gravity_falls_correct9">2</integer>
+
+    <string name="gravity_falls_question10">Секретный ингредиент кофейного омлета:</string>
+    <string-array name="gravity_falls_answers10">
+        <item>Омлет</item>
+        <item>Базилик</item>
+        <item>Кориандр</item>
+        <item>Кофе</item>
+    </string-array>
+    <integer name="gravity_falls_correct10">4</integer>
+
+</resources>

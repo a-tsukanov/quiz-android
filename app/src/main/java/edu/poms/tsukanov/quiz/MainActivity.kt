@@ -14,7 +14,6 @@ import android.view.Menu
 import android.view.MenuItem
 import edu.poms.tsukanov.quiz.database.QuizResultsDb
 import edu.poms.tsukanov.quiz.fragments.*
-import edu.poms.tsukanov.quiz.fragments.dummy.DashboardContent
 import edu.poms.tsukanov.quiz.passage.QuizPassage
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*

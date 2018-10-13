@@ -32,6 +32,12 @@ class ChooseQuizFragment : Fragment() {
             openFragment(lawSetUserFragment)
         }
 
+        val quiz3: ImageButton = activity!!.findViewById(R.id.quiz3)
+        quiz3.setOnClickListener {
+            val gravityFallsSetUserFragment = CreateUserFragment.newInstance("gravity_falls", 10)
+            openFragment(gravityFallsSetUserFragment)
+        }
+
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,

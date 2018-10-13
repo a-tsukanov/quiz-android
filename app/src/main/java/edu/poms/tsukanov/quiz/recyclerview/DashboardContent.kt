@@ -1,4 +1,4 @@
-package edu.poms.tsukanov.quiz.fragments.dummy
+package edu.poms.tsukanov.quiz.recyclerview
 
 import java.util.ArrayList
 import java.util.HashMap
