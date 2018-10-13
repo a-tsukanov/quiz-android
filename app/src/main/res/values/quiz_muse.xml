@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="muse_question1">Название первого альбома Muse:</string>
+    <string-array name="muse_answers1">
+        <item>Absolution</item>
+        <item>Black Holes and Revelations</item>
+        <item>Showbiz</item>
+        <item>OK Computer</item>
+    </string-array>
+    <integer name="muse_correct1">3</integer>
+
+    <string name="muse_question2">Кто из участников группы окончил университет?</string>
+    <string-array name="muse_answers2">
+        <item>Мэтт</item>
+        <item>Дом</item>
+        <item>Крис</item>
+        <item>Никто из участников не учился в университете</item>
+    </string-array>
+    <integer name="muse_correct2">4</integer>
+
+    <string name="muse_question3">Что использовалось в качестве перкуссии в песне Screenager?</string>
+    <string-array name="muse_answers3">
+        <item>Молния на джинсах</item>
+        <item>Шейкер</item>
+        <item>Бумажная обёртка</item>
+        <item>Перечница</item>
+    </string-array>
+    <integer name="muse_correct3">1</integer>
+
+    <string name="muse_question4">Какой из этих звуков используется в The Small Print?</string>
+    <string-array name="muse_answers4">
+        <item>Кошачье мяуканье</item>
+        <item>Звук морских волн</item>
+        <item>Звук колокола</item>
+        <item>Звук бьющегося стекла</item>
+    </string-array>
+    <integer name="muse_correct4">1</integer>
+
+    <string name="muse_question5">Какой из видов спорта предпочитает Крис?</string>
+    <string-array name="muse_answers5">
+        <item>Хоккей</item>
+        <item>Волейбол</item>
+        <item>Гимнастика</item>
+        <item>Футбол</item>
+    </string-array>
+    <integer name="muse_correct5">4</integer>
+
+    <string name="muse_question6">Одна из главных особенной Беллами:</string>
+    <string-array name="muse_answers6">
+        <item>Не ест перец</item>
+        <item>Не знает алфавит</item>
+        <item>Любит петь босиком в студии</item>
+        <item>Пришелец</item>
+    </string-array>
+    <integer name="muse_correct6">3</integer>
+
+    <string name="muse_question7">В каком году была сформирована группа?</string>
+    <string-array name="muse_answers7">
+        <item>1945</item>
+        <item>1998</item>
+        <item>1994</item>
+        <item>1999</item>
+    </string-array>
+    <integer name="muse_correct7">3</integer>
+
+    <string name="muse_question8">Сколько всего песен было записано для альбома Showbiz?</string>
+    <string-array name="muse_answers8">
+        <item>80</item>
+        <item>34</item>
+        <item>32</item>
+        <item>15</item>
+    </string-array>
+    <integer name="muse_correct8">1</integer>
+
+    <string name="muse_question9">Какое место занимает Беллами в списке величайших рок-н-ролльщиков всех времён по версии журнала NME?</string>
+    <string-array name="muse_answers9">
+        <item>100</item>
+        <item>2</item>
+        <item>76</item>
+        <item>14</item>
+    </string-array>
+    <integer name="muse_correct9">4</integer>
+
+    <string name="muse_question10">Во сколько лет Ховард начал играть на барабанах?</string>
+    <string-array name="muse_answers10">
+        <item>3</item>
+        <item>12</item>
+        <item>10</item>
+        <item>17</item>
+    </string-array>
+    <integer name="muse_correct10">2</integer>
+
+</resources>
