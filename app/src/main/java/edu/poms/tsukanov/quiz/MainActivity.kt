@@ -102,6 +102,7 @@ class MainActivity :
         val nextFragment = when (item.itemId) {
             R.id.nav_start_quiz -> chooseQuizFragment
             R.id.nav_dashboard -> DashboardFragment.newInstance()
+            //R.id.nav_download
             else -> throw RuntimeException("Unknown item chosen")
         }
         openFragment(nextFragment)

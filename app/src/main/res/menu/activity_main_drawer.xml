@@ -12,6 +12,10 @@
             android:id="@+id/nav_dashboard"
             android:icon="@drawable/ic_dashboard_black_24dp"
             android:title="Рекорды" />
+        <item
+            android:id="@+id/nav_download"
+            android:icon="@drawable/ic_file_download_black_24dp"
+            android:title="Скачать" />
     </group>
 
 </menu>
