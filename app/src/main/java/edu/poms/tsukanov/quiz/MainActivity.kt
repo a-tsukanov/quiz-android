@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentTransaction
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import edu.poms.tsukanov.quiz.database.QuizResultsDb
@@ -17,7 +18,9 @@ import edu.poms.tsukanov.quiz.fragments.*
 import edu.poms.tsukanov.quiz.passage.QuizPassage
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
+import org.jetbrains.anko.doAsync
 import java.lang.RuntimeException
+import java.net.URL
 
 class MainActivity :
         AppCompatActivity(),
@@ -102,7 +105,13 @@ class MainActivity :
         val nextFragment = when (item.itemId) {
             R.id.nav_start_quiz -> chooseQuizFragment
             R.id.nav_dashboard -> DashboardFragment.newInstance()
-            //R.id.nav_download
+            R.id.nav_download -> {
+                doAsync {
+                    val res = URL("http://10.0.2.2:9595/api/quizes/").readText()
+                    Log.w("Hello", res)
+                }
+                chooseQuizFragment
+            }
             else -> throw RuntimeException("Unknown item chosen")
         }
         openFragment(nextFragment)
