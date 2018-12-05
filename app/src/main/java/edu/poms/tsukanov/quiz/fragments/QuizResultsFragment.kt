@@ -17,7 +17,6 @@ import edu.poms.tsukanov.quiz.passage.QuizPassage
 
 
 class QuizResultsFragment : Fragment() {
-    private var listener: OnFragmentInteractionListener? = null
     private lateinit var qp: QuizPassage
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -35,7 +34,7 @@ class QuizResultsFragment : Fragment() {
 
         val fab: FloatingActionButton = layout.findViewById(R.id.floatingActionButton)
         fab.setOnClickListener {
-            val fragment = ChooseQuizFragment.newInstance()
+            val fragment = ChooseQuizFragment()
             openFragment(fragment)
         }
 
@@ -54,23 +53,6 @@ class QuizResultsFragment : Fragment() {
         MainActivity.db.dao().add(result)
     }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        if (context is OnFragmentInteractionListener) {
-            listener = context
-        } else {
-            throw RuntimeException(context.toString() + " must implement OnFragmentInteractionListener")
-        }
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        listener = null
-    }
-
-    interface OnFragmentInteractionListener {
-        fun onFragmentInteraction(uri: Uri)
-    }
 
     companion object {
 

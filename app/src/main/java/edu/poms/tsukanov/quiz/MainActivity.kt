@@ -24,12 +24,7 @@ import java.net.URL
 
 class MainActivity :
         AppCompatActivity(),
-        NavigationView.OnNavigationItemSelectedListener,
-        ChooseQuizFragment.OnFragmentInteractionListener,
-        CreateUserFragment.OnFragmentInteractionListener,
-        QuizFragment.OnFragmentInteractionListener,
-        QuizResultsFragment.OnFragmentInteractionListener,
-        DashboardFragment.OnListFragmentInteractionListener {
+        NavigationView.OnNavigationItemSelectedListener {
 
     lateinit var chooseQuizFragment: ChooseQuizFragment
     lateinit var quizFragment: QuizFragment
@@ -67,7 +62,7 @@ class MainActivity :
     private fun initFragments() {
         val defaultQp = QuizPassage("python", 10, "")
 
-        chooseQuizFragment = ChooseQuizFragment.newInstance()
+        chooseQuizFragment = ChooseQuizFragment()
         quizFragment = QuizFragment.newInstance(defaultQp)
         createUserFragment = CreateUserFragment.newInstance("python", 10)
         quizResultsFragment = QuizResultsFragment.newInstance(defaultQp)
@@ -104,7 +99,7 @@ class MainActivity :
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         val nextFragment = when (item.itemId) {
             R.id.nav_start_quiz -> chooseQuizFragment
-            R.id.nav_dashboard -> DashboardFragment.newInstance()
+            R.id.nav_dashboard -> DashboardFragment()
             R.id.nav_download -> {
                 doAsync {
                     val res = URL("http://10.0.2.2:9595/api/quizes/").readText()
@@ -117,14 +112,6 @@ class MainActivity :
         openFragment(nextFragment)
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
-    }
-
-    override fun onFragmentInteraction(uri: Uri) {
-
-    }
-
-    override fun onListFragmentInteraction() {
-
     }
 
     private fun openFragment(newFragment: Fragment) {
