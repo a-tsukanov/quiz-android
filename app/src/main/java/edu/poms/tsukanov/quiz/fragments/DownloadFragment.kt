@@ -17,11 +17,4 @@ class DownloadFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_download, container, false)
     }
 
-
-    companion object {
-
-        @JvmStatic
-        fun newInstance() =
-                DownloadFragment()
-    }
 }

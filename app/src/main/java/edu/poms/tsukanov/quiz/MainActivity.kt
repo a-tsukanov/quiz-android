@@ -2,7 +2,6 @@ package edu.poms.tsukanov.quiz
 
 import android.arch.persistence.room.Room
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.app.Fragment
@@ -15,10 +14,12 @@ import android.view.Menu
 import android.view.MenuItem
 import edu.poms.tsukanov.quiz.database.QuizResultsDb
 import edu.poms.tsukanov.quiz.fragments.*
-import edu.poms.tsukanov.quiz.passage.QuizPassage
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
+
 import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.toast
+import org.jetbrains.anko.uiThread
 import java.lang.RuntimeException
 import java.net.URL
 
@@ -26,10 +27,8 @@ class MainActivity :
         AppCompatActivity(),
         NavigationView.OnNavigationItemSelectedListener {
 
-    lateinit var chooseQuizFragment: ChooseQuizFragment
-    lateinit var quizFragment: QuizFragment
-    lateinit var quizResultsFragment: QuizResultsFragment
-    lateinit var createUserFragment: CreateUserFragment
+    private lateinit var chooseQuizFragment: ChooseQuizFragment
+    private lateinit var dashboardFragment: DashboardFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         db = Room.databaseBuilder(
@@ -60,12 +59,8 @@ class MainActivity :
     }
 
     private fun initFragments() {
-        val defaultQp = QuizPassage("python", 10, "")
-
         chooseQuizFragment = ChooseQuizFragment()
-        quizFragment = QuizFragment.newInstance(defaultQp)
-        createUserFragment = CreateUserFragment.newInstance("python", 10)
-        quizResultsFragment = QuizResultsFragment.newInstance(defaultQp)
+        dashboardFragment = DashboardFragment()
     }
 
     override fun onBackPressed() {
@@ -96,20 +91,26 @@ class MainActivity :
         }
     }
 
+    private fun downloadQuizes() {
+        doAsync {
+            val res = URL("http://10.0.2.2:9595/api/quizes/").readText()
+            Log.w("Hello", res)
+        }
+    }
+
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        val nextFragment = when (item.itemId) {
-            R.id.nav_start_quiz -> chooseQuizFragment
-            R.id.nav_dashboard -> DashboardFragment()
+        when (item.itemId) {
+            R.id.nav_start_quiz -> openFragment(chooseQuizFragment)
+            R.id.nav_dashboard -> openFragment(dashboardFragment)
             R.id.nav_download -> {
+                toast("Downloading...")
                 doAsync {
                     val res = URL("http://10.0.2.2:9595/api/quizes/").readText()
                     Log.w("Hello", res)
                 }
-                chooseQuizFragment
             }
             else -> throw RuntimeException("Unknown item chosen")
         }
-        openFragment(nextFragment)
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
     }
