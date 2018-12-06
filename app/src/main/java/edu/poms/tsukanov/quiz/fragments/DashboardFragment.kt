@@ -31,13 +31,4 @@ class DashboardFragment : Fragment() {
 
         return view
     }
-
-
-    companion object {
-
-
-        @JvmStatic
-        fun newInstance() =
-                DashboardFragment()
-    }
 }

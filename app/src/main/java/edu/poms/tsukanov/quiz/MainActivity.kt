@@ -92,9 +92,21 @@ class MainActivity :
     }
 
     private fun downloadQuizes() {
+        toast("Downloading...")
         doAsync {
-            val res = URL("http://10.0.2.2:9595/api/quizes/").readText()
-            Log.w("Hello", res)
+            val res = try {
+                val r = URL("http://10.0.2.2:9595/api/quizes/").readText()
+                Log.w("Hello", r)
+                r
+            }
+            catch(e: Exception) {
+                Log.e("Hello", "Damn", e)
+                throw e
+            }
+            val frag = DownloadFragment.newInstance(res)
+            uiThread {
+                openFragment(frag)
+            }
         }
     }
 
@@ -102,13 +114,7 @@ class MainActivity :
         when (item.itemId) {
             R.id.nav_start_quiz -> openFragment(chooseQuizFragment)
             R.id.nav_dashboard -> openFragment(dashboardFragment)
-            R.id.nav_download -> {
-                toast("Downloading...")
-                doAsync {
-                    val res = URL("http://10.0.2.2:9595/api/quizes/").readText()
-                    Log.w("Hello", res)
-                }
-            }
+            R.id.nav_download -> downloadQuizes()
             else -> throw RuntimeException("Unknown item chosen")
         }
         drawer_layout.closeDrawer(GravityCompat.START)

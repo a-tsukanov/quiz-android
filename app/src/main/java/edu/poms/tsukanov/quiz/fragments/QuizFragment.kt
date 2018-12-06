@@ -129,7 +129,7 @@ class QuizFragment : Fragment() {
             (0..3).map {radioGroup.getChildAt(it).isEnabled = false }
             Snackbar.make(view!!, "Correct answer is the ${getCorrectAnswerStr()}",
                         Snackbar.LENGTH_INDEFINITE)
-                    .setAction("OK") { _ ->
+                    .setAction("OK") {
                         prepareAndOpenFragment()
                     }
                     .show()
