@@ -13,6 +13,7 @@ import android.widget.TextView
 
 import edu.poms.tsukanov.quiz.R
 import edu.poms.tsukanov.quiz.passage.QuizPassage
+import java.lang.Exception
 
 
 private const val QUIZ_NAME = "quizName"
@@ -43,8 +44,12 @@ class CreateUserFragment : Fragment() {
             val usernameView: TextView = layout.findViewById(R.id.usernameText)
             val username = usernameView.text
             val qp = QuizPassage(quizName!!, questionsNumber!!, username.toString())
-            val downloadedName =
-                    DownloadFragment.downloadedInfo.getJSONObject(0).getString("name")
+            val downloadedName = try {
+                DownloadFragment.downloadedInfo.getJSONObject(0).getString("name")
+            }
+            catch (e: Exception) {
+                "didn't download anything"
+            }
             val fragment = when(qp.name) {
                 downloadedName -> DownloadedQuizFragment.newInstance(qp)
                 else -> QuizFragment.newInstance(qp)
