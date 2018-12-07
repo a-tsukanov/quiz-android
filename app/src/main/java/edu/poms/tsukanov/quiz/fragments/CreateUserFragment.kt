@@ -43,8 +43,14 @@ class CreateUserFragment : Fragment() {
             val usernameView: TextView = layout.findViewById(R.id.usernameText)
             val username = usernameView.text
             val qp = QuizPassage(quizName!!, questionsNumber!!, username.toString())
-            val fragment = QuizFragment.newInstance(qp)
+            val downloadedName =
+                    DownloadFragment.downloadedInfo.getJSONObject(0).getString("name")
+            val fragment = when(qp.name) {
+                downloadedName -> DownloadedQuizFragment.newInstance(qp)
+                else -> QuizFragment.newInstance(qp)
+            }
             openFragment(fragment)
+
         }
         return layout
     }

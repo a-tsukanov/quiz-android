@@ -94,7 +94,7 @@ class MainActivity :
     private fun downloadQuizes() {
         toast("Downloading...")
         doAsync {
-            val res = try {
+            val json = try {
                 val r = URL("http://10.0.2.2:9595/api/quizes/").readText()
                 Log.w("Hello", r)
                 r
@@ -103,7 +103,7 @@ class MainActivity :
                 Log.e("Hello", "Damn", e)
                 throw e
             }
-            val frag = DownloadFragment.newInstance(res)
+            val frag = DownloadFragment.newInstance(json)
             uiThread {
                 openFragment(frag)
             }
